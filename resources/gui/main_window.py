@@ -1,6 +1,8 @@
 from PyQt5.QtWidgets import QMainWindow, QVBoxLayout, QWidget, QPushButton, QLineEdit, QTabWidget, \
     QCheckBox, QLabel, QFrame
 
+from PyQt5.QtGui import QIcon
+
 from PyQt5.QtCore import QThread, pyqtSignal
 import time
 
@@ -18,13 +20,20 @@ class MainWindow(QMainWindow):
 
     def init_gui(self):
 
-        self.setWindowTitle("Moja aplikacja")
+        '''window attributes'''
+        self.setWindowTitle(self.data_storage.program_name)
+        self.resize(800, 600)  # Set window size
+        self.showMaximized()  # Maximized window
+        #self.setWindowIcon(QIcon("icon.png"))  # Ustawienie ikony okna
 
         main_widget = QWidget(self)
+
         layout = QVBoxLayout(main_widget)
 
+        '''menu'''
         tab_widget = QTabWidget(self)
         layout.addWidget(tab_widget)
+
 
         # Page 1 definition in file pages._page1.py
         self.page1(tab_widget)
@@ -37,9 +46,7 @@ class MainWindow(QMainWindow):
 
         self.setCentralWidget(main_widget)
 
-
         self.program_thread_1()
-
 
     def program_thread_1(self, ):
         self.worker_thread = WorkerThread(self.data_storage)
@@ -48,7 +55,6 @@ class MainWindow(QMainWindow):
 
     def display_message(self, message):
         print(message)
-
 
 class WorkerThread(QThread):
     signal = pyqtSignal(str)
