@@ -7,7 +7,7 @@ from PyQt5.QtCore import QThread, pyqtSignal
 import time
 
 class MainWindow(QMainWindow):
-    from resources.gui.pages._page1 import page1, generate_text
+    from resources.gui.pages._page1 import page1
     from resources.gui.pages._page2 import page2
     from resources.gui.pages._page3 import page3
 
@@ -34,7 +34,7 @@ class MainWindow(QMainWindow):
         tab_widget = QTabWidget(self)
         layout.addWidget(tab_widget)
 
-
+        '''here are gui pages'''
         # Page 1 definition in file pages._page1.py
         self.page1(tab_widget)
 
@@ -46,6 +46,7 @@ class MainWindow(QMainWindow):
 
         self.setCentralWidget(main_widget)
 
+        '''here are defined backend threads'''
         self.program_thread_1()
 
     def program_thread_1(self, ):

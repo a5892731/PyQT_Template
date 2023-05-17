@@ -1,48 +1,65 @@
 from PyQt5.QtWidgets import QMainWindow, QVBoxLayout, QWidget, QPushButton, QLineEdit, QTabWidget, \
-    QCheckBox, QLabel, QGroupBox
+    QCheckBox, QLabel, QGroupBox, QGridLayout, QLayout
+from PyQt5.QtCore import Qt
 
-from PyQt5.QtCore import Qt  # Dodanie importu modułu QtCore
+from resources.gui.widgets.group_box_class import GroupBox
+
+
 
 def page1(self, tab_widget):
-    def label_frame(title):
-        def widgets_in_labelframe(layout):
-            '''
-            Add your widgets here
-            '''
-            button = QPushButton("Kliknij mnie")
-            layout.addWidget(button)
-
-        group_box = QGroupBox(title)
-        #group_box.setAlignment(Qt.AlignCenter)
-        group_box.setFlat(False)
-        group_box.setMinimumSize(200, 100)  # Set minimal size
-        group_box.setMaximumSize(200, 100)  # Set maximal size
-
-        layout = QVBoxLayout()
-
-
-        widgets_in_labelframe(layout)  # widgets inside
-
-        group_box.setLayout(layout)
-
-        return group_box
-
     '''page 1 atrubutes'''
     page1 = QWidget(self)
-    layout_page1 = QVBoxLayout(page1)
+    grid_layout = QGridLayout(page1)
 
     '''define widgets'''
-    label_frame = label_frame("tekst")
+    group_box1 = GroupBox1(title="title", page=grid_layout)
+    group_box1.import_data(DataStorage = self.data_storage)
+    group_box2 = GroupBox1(title="title")
 
+    '''add widgets to layout grid'''
+    grid_layout.addWidget(group_box1.group_box, 0, 0)
+    grid_layout.addWidget(group_box2.group_box, 0, 1)
 
-    '''add widgets'''
-    layout_page1.addWidget(label_frame)
-    layout_page1.setAlignment(label_frame, Qt.AlignTop | Qt.AlignLeft)  # Ustawienie wyrównania widgetu
+    '''grid settings'''
+    grid_layout.setRowStretch(0, 0)  # Restrict row 0
+    grid_layout.setColumnStretch(0, 0)  # Restrict column 0
+    grid_layout.setSizeConstraint(QLayout.SetFixedSize)        # Set size constraint
+    self.setLayout(grid_layout)         # Set layout
+
     '''end page 1'''
     tab_widget.addTab(page1, "Page 1")
 
 
+class GroupBox1(GroupBox):
+    def define_widgets(self):
+        """This function need to be filed in child class with widgets
 
-def generate_text(self):
-    self.data_storage.text_data = "Udało się!"
+        self.button = ButtonWidget(layout=self.layout)
+        """
+        self.button = ButtonWidget(layout=self.layout)
 
+
+
+
+class ButtonWidget(QWidget):
+    def __init__(self, name = 'Click me', layout=None):
+        super().__init__()
+        self.button = None
+        self.button_name = name
+        self.layout = layout
+        self.init_ui()
+
+    def init_ui(self):
+        # Create a button
+        self.button = QPushButton(self.button_name, self)
+
+        # Connect the button's clicked signal to a function
+        self.button.clicked.connect(self.button_clicked)
+
+        # show widget
+        self.show()
+
+        self.layout.addWidget(self.button)
+
+    def button_clicked(self):
+        print('Button clicked!')
