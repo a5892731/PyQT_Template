@@ -13,7 +13,7 @@ class GroupBox(QWidget):
                  grid_position = (0, 0), columnspan = 1, rowspan = 1 ):
         super().__init__()
         '''data'''
-        self.grid_layout = grid_layout
+        self.paste_on_grid = grid_layout
         self.DataStorage = DataStorage
         '''layouts'''
         self.layout = QVBoxLayout()
@@ -30,13 +30,11 @@ class GroupBox(QWidget):
         self.group_box.setLayout(self.grid_layout)
         self.layout.addWidget(self.group_box)
         self.setLayout(self.layout)  # Set layout
-
         ''' widgets positioning'''
         self.group_box.setAlignment(Qt.AlignTop)
         self.group_box.setAlignment(Qt.AlignLeft)
-
         '''paste group box on grid'''
-        self.grid_layout.addWidget(self.group_box, grid_position[0], grid_position[1], columnspan, rowspan)
+        self.paste_on_grid.addWidget(self.group_box, grid_position[0], grid_position[1], rowspan, columnspan)
 
     def define_widgets(self):
         """This function need to be filed in child class with widgets"""

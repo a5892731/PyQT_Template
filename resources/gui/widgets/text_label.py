@@ -29,4 +29,4 @@ class TextLabelWidget(QWidget):
         self.label.setAlignment(self.text_position)
         '''show widget on layout'''
         #self.layout.addWidget(self.label)
-        self.layout.addWidget(self.label, self.grid_position[0], self.grid_position[1], self.columnspan, self.rowspan)
+        self.layout.addWidget(self.label, self.grid_position[0], self.grid_position[1], self.rowspan, self.columnspan)

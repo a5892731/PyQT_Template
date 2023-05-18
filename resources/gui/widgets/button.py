@@ -32,7 +32,7 @@ class ButtonWidget(QWidget):
 
         '''show widget on layout'''
         #self.layout.addWidget(self.button)
-        self.layout.addWidget(self.button, self.grid_position[0], self.grid_position[1], self.columnspan, self.rowspan)
+        self.layout.addWidget(self.button, self.grid_position[0], self.grid_position[1], self.rowspan, self.columnspan)
 
     def button_clicked(self):
         '''put your button function here'''
