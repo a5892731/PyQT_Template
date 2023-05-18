@@ -1,14 +1,17 @@
 from PyQt5.QtWidgets import QWidget, QPushButton
 
 class ButtonWidget(QWidget):
-    def __init__(self, layout= None, name = 'Click me', DataStorage=None, enable=True, on_pressed = True):
+    def __init__(self, layout= None, name = 'Click me', DataStorage=None, enable=True, on_pressed = True,
+                 grid_position = (0, 0), columnspan = 1, rowspan = 1 ):
         super().__init__()
         self.layout = layout
         self.enable = enable
         self.on_pressed = on_pressed
         self.button_name = name
         self.DataStorage = DataStorage
-
+        self.grid_position = grid_position #grid_layout.addWidget(self.group_box1.group_box, 0, 0)
+        self.columnspan = columnspan
+        self.rowspan = rowspan
         self.init_ui()
 
     def init_ui(self):
@@ -28,7 +31,8 @@ class ButtonWidget(QWidget):
             self.button.clicked.connect(self.button_clicked)
 
         '''show widget on layout'''
-        self.layout.addWidget(self.button)
+        #self.layout.addWidget(self.button)
+        self.layout.addWidget(self.button, self.grid_position[0], self.grid_position[1], self.columnspan, self.rowspan)
 
     def button_clicked(self):
         '''put your button function here'''

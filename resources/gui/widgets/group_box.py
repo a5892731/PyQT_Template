@@ -1,30 +1,45 @@
-from PyQt5.QtWidgets import QGroupBox, QVBoxLayout
+from PyQt5.QtWidgets import QGroupBox, QVBoxLayout, QGridLayout, QWidget, QLayout
 from PyQt5.QtCore import Qt
 
+'''
+Warning!
+Group Box must be included as self.group_box_name if you want to use any buttons inside it.
+'''
 
 
-class GroupBox():
+class GroupBox(QWidget):
     """this is a parent GroupBox CLASS"""
-    def __init__(self, title, page = None, size_x = 200, size_y = 100, DataStorage= None):
-        self.page = page
+    def __init__(self, title, grid_layout = None, size_x = 200, size_y = 100, DataStorage= None,
+                 grid_position = (0, 0), columnspan = 1, rowspan = 1 ):
+        super().__init__()
+        '''data'''
+        self.grid_layout = grid_layout
         self.DataStorage = DataStorage
-        self.group_box = QGroupBox(title)
-        self.group_box.setAlignment(Qt.AlignCenter)
-        self.group_box.setFlat(False) # border line
-        self.group_box.setMinimumSize(size_x, size_y)  # Set minimal size
-
+        '''layouts'''
         self.layout = QVBoxLayout()
-
+        self.grid_layout = QGridLayout()
+        '''create group box'''
+        self.group_box = QGroupBox(title)
+        '''group box attributes'''
+        self.group_box.setAlignment(Qt.AlignCenter)
+        self.group_box.setFlat(False)  # border line
+        self.group_box.setMinimumSize(size_x, size_y)  # Set minimal size
+        '''call your widgets'''
         self.define_widgets()
+        '''grid settings'''
+        self.group_box.setLayout(self.grid_layout)
+        self.layout.addWidget(self.group_box)
+        self.setLayout(self.layout)  # Set layout
 
-        self.group_box.setLayout(self.layout)
-        #widgets positioning
+        ''' widgets positioning'''
         self.group_box.setAlignment(Qt.AlignTop)
         self.group_box.setAlignment(Qt.AlignLeft)
+
+        '''paste group box on grid'''
+        self.grid_layout.addWidget(self.group_box, grid_position[0], grid_position[1], columnspan, rowspan)
 
     def define_widgets(self):
         """This function need to be filed in child class with widgets"""
         pass
-
 
 
