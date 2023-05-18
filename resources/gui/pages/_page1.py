@@ -5,6 +5,7 @@ from PyQt5.QtCore import Qt
 from resources.gui.widgets.group_box import GroupBox
 from resources.gui.widgets.button import ButtonWidget
 from resources.gui.widgets.text_label import TextLabelWidget
+from resources.gui.widgets.entry import EntryWidget
 
 
 def page1(self, tab_widget):
@@ -31,6 +32,15 @@ class Page1_GroupBox1(GroupBox):
         self.button = Page1_Button(layout=self.grid_layout, name = "button", DataStorage=self.DataStorage, grid_position=(0, 0))
         self.label = TextLabelWidget(text = 'label ..........:', layout=self.grid_layout,
                                      font = "Arial", font_size=10, grid_position=(1, 0))
+
+        self.entry = EntryWidget(layout=self.grid_layout, font = "Arial", font_size=10, text_color='black',
+                 background_color='white', text_position = Qt.AlignLeft,
+                 grid_position = (2, 0))
+
+        self.entry2 = EntryWidget(layout=self.grid_layout, font = "Arial", font_size=10, text_color='black',
+                 background_color='white', text_position = Qt.AlignLeft, read_only = True,
+                 grid_position = (3, 0))
+
 
 class Page1_Button(ButtonWidget):
     def button_clicked(self):
