@@ -13,15 +13,15 @@ class MainWindow(QMainWindow):
 
 
 
-    def __init__(self, data_storage):
+    def __init__(self, DataStorage):
         super().__init__()
-        self.data_storage = data_storage
+        self.DataStorage = DataStorage
         self.init_gui()
 
     def init_gui(self):
 
         '''window attributes'''
-        self.setWindowTitle(self.data_storage.program_name)
+        self.setWindowTitle(self.DataStorage.program_name)
         self.resize(800, 600)  # Set window size
         self.showMaximized()  # Maximized window
         #self.setWindowIcon(QIcon("icon.png"))  # Ustawienie ikony okna
@@ -50,7 +50,7 @@ class MainWindow(QMainWindow):
         self.program_thread_1()
 
     def program_thread_1(self, ):
-        self.worker_thread = WorkerThread(self.data_storage)
+        self.worker_thread = WorkerThread(self.DataStorage)
         self.worker_thread.signal.connect(self.display_message)
         self.worker_thread.start()
 

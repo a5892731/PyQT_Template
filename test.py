@@ -4,10 +4,11 @@ from PyQt5.QtCore import Qt
 import sys
 
 class ButtonWidget(QWidget):
-    def __init__(self, name = 'Click me'):
+    def __init__(self, name = 'Click me', storage_data=None):
         super().__init__()
         self.button = None
         self.button_name = name
+        self.storage_data = storage_data
         self.init_ui()
 
     def init_ui(self):
@@ -21,6 +22,7 @@ class ButtonWidget(QWidget):
         self.show()
 
     def button_clicked(self):
+
         print('Button clicked!')
 
 if __name__ == '__main__':
