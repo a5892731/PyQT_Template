@@ -12,6 +12,7 @@ class ButtonWidget(QWidget):
         self.grid_position = grid_position #grid_layout.addWidget(self.group_box1.group_box, 0, 0)
         self.columnspan = columnspan
         self.rowspan = rowspan
+
         self.init_ui()
 
     def init_ui(self):

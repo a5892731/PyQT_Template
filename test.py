@@ -1,31 +1,34 @@
-from PyQt5.QtWidgets import QMainWindow, QVBoxLayout, QWidget, QPushButton, QLineEdit, QTabWidget, \
-    QCheckBox, QLabel, QGroupBox, QGridLayout, QLayout, QApplication
-from PyQt5.QtCore import Qt
 import sys
+from PyQt5.QtWidgets import QApplication, QWidget, QVBoxLayout, QLabel, QLineEdit
 
-class ButtonWidget(QWidget):
-    def __init__(self, name = 'Click me', storage_data=None):
+
+class MyWidget(QWidget):
+    def __init__(self):
         super().__init__()
-        self.button = None
-        self.button_name = name
-        self.storage_data = storage_data
         self.init_ui()
 
     def init_ui(self):
-        # Create a button
-        self.button = QPushButton(self.button_name, self)
+        layout = QVBoxLayout()
 
-        # Connect the button's clicked signal to a function
-        self.button.clicked.connect(self.button_clicked)
+        label = QLabel("Enter your name:")
+        line_edit = QLineEdit()
+        line_edit.returnPressed.connect(self.on_return_pressed)  # Podłączenie sygnału returnPressed do metody
 
-        # show widget
+        layout.addWidget(label)
+        layout.addWidget(line_edit)
+
+        self.setLayout(layout)
+        self.setWindowTitle("QLineEdit Example")
         self.show()
 
-    def button_clicked(self):
+    def on_return_pressed(self):
+        line_edit = self.sender()  # Pobranie obiektu QLineEdit, który wywołał sygnał
+        if line_edit is not None:
+            text = line_edit.text()  # Pobranie wprowadzonego tekstu
+            print("Entered text:", text)
 
-        print('Button clicked!')
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
-    widget = ButtonWidget()
+    window = MyWidget()
     sys.exit(app.exec_())
