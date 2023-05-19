@@ -48,15 +48,14 @@ class EntryWidget(QWidget):
             self.line_edit.setText(str(self.variable))
 
         '''show widget on layout'''
-        # self.layout.addWidget(self.button)
         self.layout.addWidget(self.line_edit, self.grid_position[0], self.grid_position[1], self.rowspan,
                               self.columnspan)
 
     def on_return_pressed(self):
         '''get data from entry on enter event'''
-        line_edit = self.sender()  # Get the QLineEdit object that triggered the signal
-        if line_edit is not None:
-            text = line_edit.text()  # Get the entered text
+        self.line_edit = self.sender()  # Get the QLineEdit object that triggered the signal
+        if self.line_edit is not None:
+            text = self.line_edit.text()  # Get the entered text
             print("Entered text:", text)
 
     def update_number(self, new_variable):

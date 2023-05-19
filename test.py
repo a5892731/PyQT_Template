@@ -1,5 +1,5 @@
 import sys
-from PyQt5.QtWidgets import QApplication, QWidget, QVBoxLayout, QLabel, QLineEdit
+from PyQt5.QtWidgets import QApplication, QWidget, QVBoxLayout, QLabel, QTextEdit
 
 
 class MyWidget(QWidget):
@@ -10,21 +10,21 @@ class MyWidget(QWidget):
     def init_ui(self):
         layout = QVBoxLayout()
 
-        label = QLabel("Enter your name:")
-        line_edit = QLineEdit()
-        line_edit.returnPressed.connect(self.on_return_pressed)  # Podłączenie sygnału returnPressed do metody
+        label = QLabel("Enter your text:")
+        text_edit = QTextEdit()
+        text_edit.textChanged.connect(self.on_text_changed)  # Podłączenie sygnału textChanged do metody
 
         layout.addWidget(label)
-        layout.addWidget(line_edit)
+        layout.addWidget(text_edit)
 
         self.setLayout(layout)
-        self.setWindowTitle("QLineEdit Example")
+        self.setWindowTitle("QTextEdit Example")
         self.show()
 
-    def on_return_pressed(self):
-        line_edit = self.sender()  # Pobranie obiektu QLineEdit, który wywołał sygnał
-        if line_edit is not None:
-            text = line_edit.text()  # Pobranie wprowadzonego tekstu
+    def on_text_changed(self):
+        text_edit = self.sender()  # Pobranie obiektu QTextEdit, który wywołał sygnał
+        if text_edit is not None:
+            text = text_edit.toPlainText()  # Pobranie tekstu z QTextEdit
             print("Entered text:", text)
 
 
