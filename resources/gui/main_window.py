@@ -44,8 +44,8 @@ class MainWindow(QMainWindow):
         # Page 3 definition in file pages._page2.py
         self.page3(tab_widget)
 
-        self.setCentralWidget(main_widget)
 
+        self.setCentralWidget(main_widget)
         '''here are defined backend threads'''
         self.program_thread_1()
 

@@ -7,6 +7,7 @@ from resources.gui.widgets.button import ButtonWidget
 from resources.gui.widgets.text_label import TextLabelWidget
 from resources.gui.widgets.entry import EntryWidget
 from resources.gui.widgets.text_widget import TextWidget
+from resources.gui.widgets.radiobutton import RadioButton
 
 
 def page1(self, tab_widget):
@@ -18,15 +19,19 @@ def page1(self, tab_widget):
     self.page1_group_box1 = Page1_GroupBox1(title="title", grid_layout=grid_layout, DataStorage=self.DataStorage,
                                             grid_position = (0, 0))
 
-    self.page1_group_box2 = Page1_GroupBox1(title="title", grid_layout=grid_layout, DataStorage=self.DataStorage,
+    self.page1_group_box2 = Page1_GroupBox1(title="title2", grid_layout=grid_layout, DataStorage=self.DataStorage,
                                             grid_position = (0, 1))
 
-    self.page1_group_box3 = Page1_GroupBox3(title="title2", grid_layout=grid_layout, DataStorage=self.DataStorage,
+    self.page1_group_box3 = Page1_GroupBox3(title="title3", grid_layout=grid_layout, DataStorage=self.DataStorage,
                                             grid_position = (1, 0), columnspan=2)
 
+    self.page1_group_box4 = Page1_GroupBox4(title="title4", grid_layout=grid_layout, DataStorage=self.DataStorage,
+                                            grid_position = (0, 3), columnspan=1)
+
+
     '''grid settings'''
-    grid_layout.setRowStretch(0, 0)  # Restrict row 0
-    grid_layout.setColumnStretch(0, 0)  # Restrict column 0
+    #grid_layout.setRowStretch(0, 0)  # Restrict row 0
+    #grid_layout.setColumnStretch(0, 0)  # Restrict column 0
     grid_layout.setSizeConstraint(QLayout.SetFixedSize)        # Set size constraint
     self.setLayout(grid_layout)         # Set layout
 
@@ -73,6 +78,22 @@ class Page1_GroupBox3(GroupBox):
 
         self.button3 = Page1_Button3(layout=self.grid_layout, name = "dodaj", DataStorage=self,
                                    grid_position=(3, 0), columnspan=2)
+
+class Page1_GroupBox4(GroupBox):
+    def define_widgets(self):
+        """This function need to be filed in child class with widgets"""
+
+
+        names_list = ['radiobutton1', 'radiobutton2', 'radiobutton3']
+        output_list = ['out1', 'out3', 'out3']
+
+        self.radiobutton = RadioButton(layout = self.grid_layout, names_list = names_list, output_list = output_list,
+                                       DataStorage = None, set_active = 0,
+                                       grid_position = (0,0), rowspan = 1, columnspan = 1)
+
+
+
+
 '''------------------------------------------------------------------------------------------------------------------'''
 
 class Page1_Button(ButtonWidget):
