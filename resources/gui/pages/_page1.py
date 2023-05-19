@@ -8,6 +8,7 @@ from resources.gui.widgets.text_label import TextLabelWidget
 from resources.gui.widgets.entry import EntryWidget
 from resources.gui.widgets.text_widget import TextWidget
 from resources.gui.widgets.radiobutton import RadioButton
+from resources.gui.widgets.checkbox import Checkbox
 
 
 def page1(self, tab_widget):
@@ -69,15 +70,17 @@ class Page1_GroupBox3(GroupBox):
                                read_only = False, output_widget=False)
 
         self.text2 = TextWidget(layout = self.grid_layout, grid_position = (0,1), rowspan = 1, columnspan = 1,
-                               size = (200, 300),
-                               read_only = True, output_widget=True)
+                                size = (200, 300),
+                                read_only = True, output_widget=True)
 
         self.button2 = Page1_Button2(layout=self.grid_layout, name = "wyślij", DataStorage=self,
-                                   grid_position=(2, 0), columnspan=2)
+                                     grid_position=(2, 0), columnspan=2)
 
 
         self.button3 = Page1_Button3(layout=self.grid_layout, name = "dodaj", DataStorage=self,
-                                   grid_position=(3, 0), columnspan=2)
+                                     grid_position=(3, 0), columnspan=2)
+
+
 
 class Page1_GroupBox4(GroupBox):
     def define_widgets(self):
@@ -92,7 +95,9 @@ class Page1_GroupBox4(GroupBox):
                                        grid_position = (0,0), rowspan = 1, columnspan = 1, wertical = True)
 
 
-
+        self.checkbox1 = Checkbox(layout = self.grid_layout, name = 'check1', DataStorage = None, set_active = False,
+                                  grid_position = (4,0), rowspan = 1, columnspan = 1, enable = True,
+                                  out_when_on = True, out_when_off = False)
 
 '''------------------------------------------------------------------------------------------------------------------'''
 
