@@ -1,8 +1,7 @@
-import sys
 from PyQt5.QtWidgets import QApplication, QWidget, QVBoxLayout, QLabel, QSlider
 from PyQt5.QtCore import Qt
 
-class MyWidget(QWidget):
+class Slider(QWidget):
     def __init__(self):
         super().__init__()
         self.init_ui()
@@ -29,8 +28,3 @@ class MyWidget(QWidget):
 
     def on_slider_value_changed(self, value):
         print("Slider value:", value)
-
-if __name__ == '__main__':
-    app = QApplication(sys.argv)
-    window = MyWidget()
-    sys.exit(app.exec_())
