@@ -1,5 +1,5 @@
 import sys
-from PyQt5.QtWidgets import QApplication, QWidget, QVBoxLayout, QLabel, QTextEdit
+from PyQt5.QtWidgets import QApplication, QWidget, QVBoxLayout, QPushButton, QTextEdit
 
 
 class MyWidget(QWidget):
@@ -10,22 +10,21 @@ class MyWidget(QWidget):
     def init_ui(self):
         layout = QVBoxLayout()
 
-        label = QLabel("Enter your text:")
-        text_edit = QTextEdit()
-        text_edit.textChanged.connect(self.on_text_changed)  # Podłączenie sygnału textChanged do metody
+        self.text_edit = QTextEdit()
 
-        layout.addWidget(label)
-        layout.addWidget(text_edit)
+        update_button = QPushButton("Update Text")
+        update_button.clicked.connect(self.on_update_button_clicked)
+
+        layout.addWidget(self.text_edit)
+        layout.addWidget(update_button)
 
         self.setLayout(layout)
-        self.setWindowTitle("QTextEdit Example")
+        self.setWindowTitle("QTextEdit Update Text Example")
         self.show()
 
-    def on_text_changed(self):
-        text_edit = self.sender()  # Pobranie obiektu QTextEdit, który wywołał sygnał
-        if text_edit is not None:
-            text = text_edit.toPlainText()  # Pobranie tekstu z QTextEdit
-            print("Entered text:", text)
+    def on_update_button_clicked(self):
+        new_text = "New text content"
+        self.text_edit.setPlainText(new_text)  # Update the text in QTextEdit
 
 
 if __name__ == '__main__':

@@ -33,6 +33,7 @@ def page1(self, tab_widget):
     '''end page 1'''
     tab_widget.addTab(page1, "Page 1")
 
+'''------------------------------------------------------------------------------------------------------------------'''
 
 class Page1_GroupBox1(GroupBox):
     def define_widgets(self):
@@ -60,15 +61,38 @@ class Page1_GroupBox3(GroupBox):
         """This function need to be filed in child class with widgets"""
         self.text = TextWidget(layout = self.grid_layout, grid_position = (0,0), rowspan = 1, columnspan = 1,
                                size = (200, 300),
-                               read_only = False,)
+                               read_only = False, output_widget=False)
 
         self.text2 = TextWidget(layout = self.grid_layout, grid_position = (0,1), rowspan = 1, columnspan = 1,
                                size = (200, 300),
-                               read_only = True,)
+                               read_only = True, output_widget=True)
 
+        self.button2 = Page1_Button2(layout=self.grid_layout, name = "wyślij", DataStorage=self,
+                                   grid_position=(2, 0), columnspan=2)
+
+
+        self.button3 = Page1_Button3(layout=self.grid_layout, name = "dodaj", DataStorage=self,
+                                   grid_position=(3, 0), columnspan=2)
+'''------------------------------------------------------------------------------------------------------------------'''
 
 class Page1_Button(ButtonWidget):
     def button_clicked(self):
         '''put your button function here'''
         self.DataStorage.text_data = "new text"
         print('Button clicked!')
+
+class Page1_Button2(ButtonWidget):
+    def button_clicked(self):
+        '''put your button function here'''
+        self.DataStorage.DataStorage.text_data = self.DataStorage.text.get_text()
+
+        self.DataStorage.text2.update_text(self.DataStorage.DataStorage.text_data) # DataStorage of button.group_box
+        print('wyślij button clicked!')
+
+class Page1_Button3(ButtonWidget):
+    def button_clicked(self):
+        '''put your button function here'''
+        self.DataStorage.DataStorage.text_data = self.DataStorage.text.get_text()
+
+        self.DataStorage.text2.add_text(self.DataStorage.DataStorage.text_data) # DataStorage of button.group_box
+        print('wyślij button clicked!')
