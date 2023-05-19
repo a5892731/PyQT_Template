@@ -52,10 +52,15 @@ class MainWindow(QMainWindow):
     def program_thread_1(self, ):
         self.worker_thread = WorkerThread(self.DataStorage)
         self.worker_thread.signal.connect(self.display_message)
+
         self.worker_thread.start()
 
     def display_message(self, message):
-        print(message)
+        self.DataStorage.test_number += 1
+        print(message, self.DataStorage.test_number)
+
+        self.page1_group_box1.entry2.update_number(new_variable=self.DataStorage.test_number)
+
 
 class WorkerThread(QThread):
     signal = pyqtSignal(str)

@@ -29,17 +29,22 @@ def page1(self, tab_widget):
 class Page1_GroupBox1(GroupBox):
     def define_widgets(self):
         """This function need to be filed in child class with widgets"""
-        self.button = Page1_Button(layout=self.grid_layout, name = "button", DataStorage=self.DataStorage, grid_position=(0, 0))
-        self.label = TextLabelWidget(text = 'label ..........:', layout=self.grid_layout,
+        self.button = Page1_Button(layout=self.grid_layout, name = "button", DataStorage=self.DataStorage,
+                                   grid_position=(0, 0), columnspan=2)
+        self.label = TextLabelWidget(text = 'input: ', layout=self.grid_layout,
                                      font = "Arial", font_size=10, grid_position=(1, 0))
 
         self.entry = EntryWidget(layout=self.grid_layout, font = "Arial", font_size=10, text_color='black',
                  background_color='white', text_position = Qt.AlignLeft,
-                 grid_position = (2, 0))
+                 grid_position = (1, 1), read_only = False, variable=None, output_widget = False)
+
+
+        self.label = TextLabelWidget(text = 'output: ', layout=self.grid_layout,
+                                     font = "Arial", font_size=10, grid_position=(2, 0))
 
         self.entry2 = EntryWidget(layout=self.grid_layout, font = "Arial", font_size=10, text_color='black',
-                 background_color='white', text_position = Qt.AlignLeft, read_only = True,
-                 grid_position = (3, 0))
+                 background_color='white', text_position = Qt.AlignLeft,
+                 grid_position = (2, 1), read_only = True, variable=self.DataStorage.test_number, output_widget = True)
 
 
 class Page1_Button(ButtonWidget):
