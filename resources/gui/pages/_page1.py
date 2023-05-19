@@ -85,11 +85,11 @@ class Page1_GroupBox4(GroupBox):
 
 
         names_list = ['radiobutton1', 'radiobutton2', 'radiobutton3']
-        output_list = ['out1', 'out3', 'out3']
+        output_list = ['out1', 'out2', 'out3']
 
         self.radiobutton = RadioButton(layout = self.grid_layout, names_list = names_list, output_list = output_list,
-                                       DataStorage = None, set_active = 0,
-                                       grid_position = (0,0), rowspan = 1, columnspan = 1)
+                                       DataStorage = None, set_active = 0, enable = True,
+                                       grid_position = (0,0), rowspan = 1, columnspan = 1, wertical = True)
 
 
 

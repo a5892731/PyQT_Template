@@ -1,9 +1,27 @@
-import sys
 from PyQt5.QtWidgets import QApplication, QWidget, QVBoxLayout, QLabel, QCheckBox
 
 class MyWidget(QWidget):
-    def __init__(self):
+    def __init__(self, layout = None, names_list = list(), output_list = list(), DataStorage = None, set_active = 0,
+                 grid_position = (0,0), rowspan = 1, columnspan = 1, wertical = True, enable = True):
         super().__init__()
+
+        self.layout = layout
+        self.enable = enable
+
+        self.names_list = names_list
+        self.output_list = output_list
+        self.set_active = set_active
+
+        self.radiobuttons = []
+
+        self.DataStorage = DataStorage
+        self.grid_position = grid_position
+        self.columnspan = columnspan
+        self.rowspan = rowspan
+        self.wertical = wertical
+
+        self.output = None
+
         self.init_ui()
 
     def init_ui(self):
@@ -35,8 +53,3 @@ class MyWidget(QWidget):
             checked = checkbox.isChecked()  # Get the checked state of the QCheckBox
             print("Option:", option)
             print("Checked:", checked)
-
-if __name__ == '__main__':
-    app = QApplication(sys.argv)
-    window = MyWidget()
-    sys.exit(app.exec_())

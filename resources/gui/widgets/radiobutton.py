@@ -2,11 +2,11 @@ from PyQt5.QtWidgets import QApplication, QWidget, QVBoxLayout, QLabel, QRadioBu
 
 class RadioButton(QWidget):
     def __init__(self, layout = None, names_list = list(), output_list = list(), DataStorage = None, set_active = 0,
-                 grid_position = (0,0), rowspan = 1, columnspan = 1):
+                 grid_position = (0,0), rowspan = 1, columnspan = 1, wertical = True, enable = True):
         super().__init__()
 
         self.layout = layout
-        self.enable = True
+        self.enable = enable
 
         self.names_list = names_list
         self.output_list = output_list
@@ -18,6 +18,7 @@ class RadioButton(QWidget):
         self.grid_position = grid_position
         self.columnspan = columnspan
         self.rowspan = rowspan
+        self.wertical = wertical
 
         self.output = None
 
@@ -32,14 +33,24 @@ class RadioButton(QWidget):
         # set active on start
         self.radiobuttons[self.set_active].setChecked(True)
 
+        # set enable or disable
+        for radiobutton in self.radiobuttons:
+            radiobutton.setEnabled(self.enable)
+
+
         # Connect the toggled signal to the method
         for i in range(len(self.names_list)):
             self.radiobuttons[i].toggled.connect(self.on_radio_button_toggled)
 
         # add widget
-        for i in range(len(self.names_list)):
-             self.layout.addWidget(self.radiobuttons[i], self.grid_position[0]+i, self.grid_position[1],
-                                  self.rowspan, self.columnspan)
+        if self.wertical:
+            for i in range(len(self.names_list)):
+                 self.layout.addWidget(self.radiobuttons[i], self.grid_position[0]+i, self.grid_position[1],
+                                      self.rowspan, self.columnspan)
+        else:
+            for i in range(len(self.names_list)):
+                 self.layout.addWidget(self.radiobuttons[i], self.grid_position[0], self.grid_position[1]+i,
+                                      self.rowspan, self.columnspan)
 
 
     def on_radio_button_toggled(self):
@@ -49,5 +60,6 @@ class RadioButton(QWidget):
 
             if len(self.output_list) > 0:
                 self.output = self.output_list[self.names_list.index(option)]
+                print(self.output)
 
 
