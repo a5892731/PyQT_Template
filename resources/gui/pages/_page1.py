@@ -9,6 +9,7 @@ from resources.gui.widgets.entry import EntryWidget
 from resources.gui.widgets.text_widget import TextWidget
 from resources.gui.widgets.radiobutton import RadioButton
 from resources.gui.widgets.checkbox import Checkbox
+from resources.gui.widgets.combobox import ComboBox
 
 
 def page1(self, tab_widget):
@@ -28,6 +29,10 @@ def page1(self, tab_widget):
 
     self.page1_group_box4 = Page1_GroupBox4(title="title4", grid_layout=grid_layout, DataStorage=self.DataStorage,
                                             grid_position = (0, 3), columnspan=1)
+
+    self.page1_group_box5 = Page1_GroupBox5(title="title4", grid_layout=grid_layout, DataStorage=self.DataStorage,
+                                            grid_position = (0, 4), columnspan=1)
+
 
 
     '''grid settings'''
@@ -99,6 +104,17 @@ class Page1_GroupBox4(GroupBox):
                                   grid_position = (4,0), rowspan = 1, columnspan = 1, enable = True,
                                   out_when_on = True, out_when_off = False)
 
+
+class Page1_GroupBox5(GroupBox):
+    def define_widgets(self):
+        """This function need to be filed in child class with widgets"""
+
+        names_list = ['option1', 'option2', 'option3']
+        output_list = ['out1', 'out2', 'out3']
+
+        self.combobox = ComboBox(layout = self.grid_layout, names_list = names_list, output_list = output_list,
+                                 DataStorage = None, set_active = 1,
+                                 grid_position = (0,0), rowspan = 1, columnspan = 1, enable = True)
 '''------------------------------------------------------------------------------------------------------------------'''
 
 class Page1_Button(ButtonWidget):

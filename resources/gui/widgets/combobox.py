@@ -1,39 +1,56 @@
-import sys
 from PyQt5.QtWidgets import QApplication, QWidget, QVBoxLayout, QLabel, QComboBox
 
 class ComboBox(QWidget):
-    def __init__(self):
+    def __init__(self, layout = None, names_list = list(), output_list = list(), DataStorage = None, set_active = 0,
+                 grid_position = (0,0), rowspan = 1, columnspan = 1, enable = True):
         super().__init__()
+
+        self.layout = layout
+        self.enable = enable
+
+        self.names_list = names_list
+        self.output_list = output_list
+        self.set_active = set_active
+
+        self.menu_elements = []
+
+        self.DataStorage = DataStorage
+        self.grid_position = grid_position
+        self.columnspan = columnspan
+        self.rowspan = rowspan
+
+        if len(self.output_list) > 0:
+            self.output = self.output_list[self.set_active]
+        else:
+            self.output = None
+
         self.init_ui()
 
     def init_ui(self):
-        layout = QVBoxLayout()
-
-        label = QLabel("Select an option:")
-        combo_box = QComboBox()
+        self.combo_box = QComboBox()
 
         # Add items to the combo box
-        combo_box.addItem("Option 1")
-        combo_box.addItem("Option 2")
-        combo_box.addItem("Option 3")
+        for name in self.names_list:
+            self.combo_box.addItem(name)
 
+        # set enable or disable
+        self.combo_box.setEnabled(self.enable)
+        # Set the second item as initially selected (index 1)
+        self.combo_box.setCurrentIndex(self.set_active)
         # Connect the currentIndexChanged signal to the method
-        combo_box.currentIndexChanged.connect(self.on_combo_box_index_changed)
+        self.combo_box.currentIndexChanged.connect(self.on_combo_box_index_changed)
 
-        layout.addWidget(label)
-        layout.addWidget(combo_box)
+        # add widget
+        self.layout.addWidget(self.combo_box, self.grid_position[0], self.grid_position[1],
+                              self.rowspan, self.columnspan)
 
-        self.setLayout(layout)
-        self.setWindowTitle("QComboBox Example")
-        self.show()
-
-    def on_combo_box_index_changed(self, index):
+    def on_combo_box_index_changed(self):
         combo_box = self.sender()  # Get the QComboBox object that triggered the signal
         if combo_box is not None:
             option = combo_box.currentText()  # Get the currently selected text from the QComboBox
-            print("Selected option:", option)
 
-if __name__ == '__main__':
-    app = QApplication(sys.argv)
-    window = MyWidget()
-    sys.exit(app.exec_())
+            if len(self.output_list) > 0:
+                self.output = self.output_list[self.names_list.index(option)]
+            else:
+                self.output = None
+            #print("Selected option:", option, self.output)
