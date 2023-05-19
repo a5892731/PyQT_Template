@@ -1,7 +1,7 @@
 import sys
 from PyQt5.QtWidgets import QApplication, QWidget, QVBoxLayout, QLabel, QComboBox
 
-class MyWidget(QWidget):
+class ComboBox(QWidget):
     def __init__(self):
         super().__init__()
         self.init_ui()

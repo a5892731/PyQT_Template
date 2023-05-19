@@ -51,7 +51,7 @@ class Page1_GroupBox1(GroupBox):
 
         self.entry = EntryWidget(layout=self.grid_layout, font = "Arial", font_size=10, text_color='black',
                  background_color='white', text_position = Qt.AlignLeft,
-                 grid_position = (1, 1), read_only = False, variable=None, output_widget = False)
+                 grid_position = (1, 1), read_only = False, default='', output_widget = False)
 
 
         self.label = TextLabelWidget(text = 'output: ', layout=self.grid_layout,
@@ -59,7 +59,7 @@ class Page1_GroupBox1(GroupBox):
 
         self.entry2 = EntryWidget(layout=self.grid_layout, font = "Arial", font_size=10, text_color='black',
                  background_color='white', text_position = Qt.AlignLeft,
-                 grid_position = (2, 1), read_only = True, variable=self.DataStorage.test_number, output_widget = True)
+                 grid_position = (2, 1), read_only = True, default='default', output_widget = True)
 
 
 class Page1_GroupBox3(GroupBox):

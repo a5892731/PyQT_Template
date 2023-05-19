@@ -17,7 +17,7 @@ class EntryWidget(QWidget):
     def __init__(self, layout=None, font = "Arial", font_size=10, text_color='black',
                  background_color='white', text_position = Qt.AlignLeft,
                  grid_position = (0, 0), columnspan = 1, rowspan = 1,
-                 read_only = False, variable=None, output_widget = True):
+                 read_only = False, default='None', output_widget = True):
         super().__init__()
         self.layout = layout
         self.font = font
@@ -28,9 +28,10 @@ class EntryWidget(QWidget):
         self.grid_position = grid_position #grid_layout.addWidget(self.group_box1.group_box, 0, 0)
         self.columnspan = columnspan
         self.rowspan = rowspan
-        self.variable = variable
+        self.default = default
         self.output_widget = output_widget # if True then widget is output, and o False then it is input
 
+        self.output = None
         self.read_only = read_only
 
         self.init_ui()
@@ -43,9 +44,10 @@ class EntryWidget(QWidget):
         if self.output_widget:
             '''line_edit attributes'''
             self.line_edit.setReadOnly(self.read_only)
+            self.line_edit.setText(str(self.default))
         else:
             '''print data'''
-            self.line_edit.setText(str(self.variable))
+            self.line_edit.setText(str(self.default))
 
         '''show widget on layout'''
         self.layout.addWidget(self.line_edit, self.grid_position[0], self.grid_position[1], self.rowspan,
@@ -60,5 +62,5 @@ class EntryWidget(QWidget):
 
     def update_number(self, new_variable):
         '''update variable in gui function'''
-        self.variable = new_variable
-        self.line_edit.setText(str(self.variable))
+        self.output = new_variable
+        self.line_edit.setText(str(self.output))
