@@ -3,7 +3,7 @@ from PyQt5.QtWidgets import QMainWindow, QVBoxLayout, QWidget, QPushButton, QLin
 from PyQt5.QtCore import Qt
 
 from resources.gui.widgets._widgets_lib import GroupBox, ButtonWidget, TextLabelWidget, EntryWidget, TextWidget, \
-    RadioButton, Checkbox, ComboBox, Slider, ProgressBar, SpinBox, CalendarWidget, TableWidget, TreeView
+    RadioButton, Checkbox, ComboBox, Slider, ProgressBar, SpinBox, CalendarWidget, TableWidget, TreeView, ListView
 
 
 def page1(self, tab_widget):
@@ -43,6 +43,11 @@ def page1(self, tab_widget):
 
     self.page1_group_box10 = Page1_GroupBox10(title="title9", grid_layout=grid_layout, DataStorage=self.DataStorage,
                                             grid_position = (1, 3), columnspan=2)
+
+
+    self.page1_group_box11 = Page1_GroupBox11(title="title10", grid_layout=grid_layout, DataStorage=self.DataStorage,
+                                            grid_position = (1, 5), columnspan=2)
+
 
 
     '''grid settings'''
@@ -186,7 +191,11 @@ class Page1_GroupBox10(GroupBox):
                                  grid_position = (0,0), rowspan = 1, columnspan = 1, enable = True)
 
 
+class Page1_GroupBox11(GroupBox):
+    def define_widgets(self):
+        """This function need to be filed in child class with widgets"""
 
+        self.list_view = ListView(layout=self.grid_layout)
 
 '''------------------------------------------------------------------------------------------------------------------'''
 

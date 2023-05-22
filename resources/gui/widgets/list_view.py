@@ -1,12 +1,16 @@
-import sys
 from PyQt5.QtWidgets import QApplication, QMainWindow, QListView, QVBoxLayout, QGroupBox, QLabel, QWidget
 from PyQt5.QtCore import Qt, QStringListModel
 
-
-class ListViewExample(QMainWindow):
-    def __init__(self):
+class ListView(QMainWindow):
+    def __init__(self, layout= None, grid_position = (0,0), rowspan = 1, columnspan = 1, enable = True,
+                 items = ["Item 1", "Item 2", "Item 3"]):
         super().__init__()
-        self.initUI()
+        self.layout = layout
+
+        self.items = items
+        self.grid_position = grid_position
+        self.columnspan = columnspan
+        self.rowspan = rowspan
 
     def initUI(self):
         self.setWindowTitle("List View Example")
@@ -17,11 +21,11 @@ class ListViewExample(QMainWindow):
         self.setCentralWidget(main_widget)
 
         # Create a QVBoxLayout to hold the main layout
-        layout = QVBoxLayout(main_widget)
+        #layout = QVBoxLayout(main_widget)
 
         # Create the list view widget
         list_view = QListView()
-        layout.addWidget(list_view)
+        self.layout.addWidget(list_view)
 
         # Set the model for the list view
         model = QStringListModel()
@@ -29,9 +33,3 @@ class ListViewExample(QMainWindow):
         list_view.setModel(model)
 
         self.show()
-
-
-if __name__ == '__main__':
-    app = QApplication(sys.argv)
-    window = ListViewExample()
-    sys.exit(app.exec_())
