@@ -12,6 +12,7 @@ from resources.gui.widgets.checkbox import Checkbox
 from resources.gui.widgets.combobox import ComboBox
 from resources.gui.widgets.slider import Slider
 from resources.gui.widgets.progress_bar import ProgressBar
+from resources.gui.widgets.spin_box import SpinBox
 
 
 def page1(self, tab_widget):
@@ -42,6 +43,10 @@ def page1(self, tab_widget):
 
     self.page1_group_box7 = Page1_GroupBox7(title="title6", grid_layout=grid_layout, DataStorage=self.DataStorage,
                                             grid_position = (0, 6), columnspan=1)
+
+    self.page1_group_box8 = Page1_GroupBox8(title="title7", grid_layout=grid_layout, DataStorage=self.DataStorage,
+                                            grid_position = (0, 7), columnspan=1)
+
 
     '''grid settings'''
     #grid_layout.setRowStretch(0, 0)  # Restrict row 0
@@ -147,6 +152,18 @@ class Page1_GroupBox7(GroupBox):
                                        grid_position = (0,0), rowspan = 1, columnspan = 1, enable = True,)
 
         self.progressbar.set_value(progress=50)
+
+
+class Page1_GroupBox8(GroupBox):
+    def define_widgets(self):
+        """This function need to be filed in child class with widgets"""
+
+        self.spinbox = SpinBox(layout=self.grid_layout, font = "Arial", font_size=10, text_color='black',
+                 background_color='white',
+                 DataStorage = None, min_value = 0.0, max_value = 1010.0, floating_point=True, single_step =1.0,
+                 grid_position = (0, 0), columnspan = 1, rowspan = 1,
+                 default= 0.0, read_only = False)
+
 
 '''------------------------------------------------------------------------------------------------------------------'''
 

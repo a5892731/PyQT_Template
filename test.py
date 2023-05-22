@@ -1,8 +1,8 @@
 import sys
-from PyQt5.QtWidgets import QApplication, QWidget, QVBoxLayout, QLabel, QSpinBox
+from PyQt5.QtWidgets import QApplication, QWidget, QVBoxLayout, QLabel, QDoubleSpinBox
 
 
-class SpinBoxExample(QWidget):
+class DoubleSpinBoxExample(QWidget):
     def __init__(self):
         super().__init__()
         self.initUI()
@@ -11,9 +11,12 @@ class SpinBoxExample(QWidget):
         layout = QVBoxLayout()
 
         label = QLabel("Selected value:")
-        self.selected_value_label = QLabel("0")
+        self.selected_value_label = QLabel("0.0")
 
-        spin_box = QSpinBox()
+        spin_box = QDoubleSpinBox()
+        spin_box.setRange(0.0, 100.0)  # Set the range of the double spin box from 0.0 to 100.0
+        spin_box.setSingleStep(0.1)  # Set the step size for incrementing or decrementing the value
+        spin_box.setValue(50.0)  # Set the default value of the double spin box to 50.0
         spin_box.valueChanged.connect(self.updateSelectedValue)
 
         layout.addWidget(label)
@@ -21,7 +24,7 @@ class SpinBoxExample(QWidget):
         layout.addWidget(spin_box)
 
         self.setLayout(layout)
-        self.setWindowTitle("Spin Box Example")
+        self.setWindowTitle("Double Spin Box Example")
         self.show()
 
     def updateSelectedValue(self, value):
@@ -30,5 +33,5 @@ class SpinBoxExample(QWidget):
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
-    window = SpinBoxExample()
+    window = DoubleSpinBoxExample()
     sys.exit(app.exec_())

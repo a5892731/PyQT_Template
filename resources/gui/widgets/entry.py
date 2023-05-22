@@ -49,6 +49,9 @@ class EntryWidget(QWidget):
             '''print data'''
             self.line_edit.setText(str(self.default))
 
+        '''color settings'''
+        self.line_edit.setStyleSheet("color: {}; background-color: {}".format(self.text_color, self.background_color))
+
         '''show widget on layout'''
         self.layout.addWidget(self.line_edit, self.grid_position[0], self.grid_position[1], self.rowspan,
                               self.columnspan)
