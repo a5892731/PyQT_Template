@@ -13,6 +13,7 @@ from resources.gui.widgets.combobox import ComboBox
 from resources.gui.widgets.slider import Slider
 from resources.gui.widgets.progress_bar import ProgressBar
 from resources.gui.widgets.spin_box import SpinBox
+from resources.gui.widgets.calendar import CalendarWidget
 
 
 def page1(self, tab_widget):
@@ -46,6 +47,11 @@ def page1(self, tab_widget):
 
     self.page1_group_box8 = Page1_GroupBox8(title="title7", grid_layout=grid_layout, DataStorage=self.DataStorage,
                                             grid_position = (0, 7), columnspan=1)
+
+
+    self.page1_group_box9 = Page1_GroupBox9(title="title8", grid_layout=grid_layout, DataStorage=self.DataStorage,
+                                            grid_position = (3, 0), columnspan=2)
+
 
 
     '''grid settings'''
@@ -164,6 +170,11 @@ class Page1_GroupBox8(GroupBox):
                  grid_position = (0, 0), columnspan = 1, rowspan = 1,
                  default= 0.0, read_only = False)
 
+class Page1_GroupBox9(GroupBox):
+    def define_widgets(self):
+        """This function need to be filed in child class with widgets"""
+
+        self.calendar = CalendarWidget(layout=self.grid_layout)
 
 '''------------------------------------------------------------------------------------------------------------------'''
 

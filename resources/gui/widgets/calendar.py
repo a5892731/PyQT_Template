@@ -3,13 +3,19 @@ from PyQt5.QtWidgets import QApplication, QWidget, QVBoxLayout, QLabel, QCalenda
 from PyQt5.QtCore import QDate
 
 
-class CalendarWidgetExample(QWidget):
-    def __init__(self):
+class CalendarWidget(QWidget):
+    def __init__(self, layout, grid_position = (0,0), rowspan = 1, columnspan = 1,):
         super().__init__()
+        self.layout = layout
+
+        self.grid_position = grid_position
+        self.columnspan = columnspan
+        self.rowspan = rowspan
+
         self.initUI()
 
     def initUI(self):
-        layout = QVBoxLayout()
+
 
         label = QLabel("Selected date:")
         self.selected_date_label = QLabel()
@@ -22,20 +28,16 @@ class CalendarWidgetExample(QWidget):
         self.calendar.setSelectedDate(default_date)  # Use 'self.calendar' to refer to the instance variable
         self.updateSelectedDate()
 
-        layout.addWidget(label)
-        layout.addWidget(self.selected_date_label)
-        layout.addWidget(self.calendar)  # Use 'self.calendar' to refer to the instance variable
 
-        self.setLayout(layout)
-        self.setWindowTitle("Calendar Widget Example")
-        self.show()
+
+        '''show widget on layout'''
+        self.layout.addWidget(label, self.grid_position[0], self.grid_position[1], self.rowspan, self.columnspan)
+        self.layout.addWidget(self.selected_date_label, self.grid_position[0]+1, self.grid_position[1], self.rowspan, self.columnspan)
+        self.layout.addWidget(self.calendar, self.grid_position[0]+2, self.grid_position[1], self.rowspan, self.columnspan)
+
 
     def updateSelectedDate(self):
         selected_date = self.calendar.selectedDate()  # Use 'self.calendar' to refer to the instance variable
         self.selected_date_label.setText(selected_date.toString("yyyy-MM-dd"))
 
 
-if __name__ == '__main__':
-    app = QApplication(sys.argv)
-    window = CalendarWidgetExample()
-    sys.exit(app.exec_())
