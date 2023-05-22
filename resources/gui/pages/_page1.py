@@ -11,6 +11,7 @@ from resources.gui.widgets.radiobutton import RadioButton
 from resources.gui.widgets.checkbox import Checkbox
 from resources.gui.widgets.combobox import ComboBox
 from resources.gui.widgets.slider import Slider
+from resources.gui.widgets.progress_bar import ProgressBar
 
 
 def page1(self, tab_widget):
@@ -38,6 +39,9 @@ def page1(self, tab_widget):
 
     self.page1_group_box6 = Page1_GroupBox6(title="title5", grid_layout=grid_layout, DataStorage=self.DataStorage,
                                             grid_position = (0, 5), columnspan=1)
+
+    self.page1_group_box7 = Page1_GroupBox7(title="title6", grid_layout=grid_layout, DataStorage=self.DataStorage,
+                                            grid_position = (0, 6), columnspan=1)
 
     '''grid settings'''
     #grid_layout.setRowStretch(0, 0)  # Restrict row 0
@@ -135,7 +139,14 @@ class Page1_GroupBox6(GroupBox):
                  background_color='white', text_position = Qt.AlignLeft,
                  grid_position = (2, 0), read_only = True, default='', output_widget = True)
 
+class Page1_GroupBox7(GroupBox):
+    def define_widgets(self):
+        """This function need to be filed in child class with widgets"""
 
+        self.progressbar = ProgressBar(layout = self.grid_layout, name = '', DataStorage = None,
+                                       grid_position = (0,0), rowspan = 1, columnspan = 1, enable = True,)
+
+        self.progressbar.set_value(progress=50)
 
 '''------------------------------------------------------------------------------------------------------------------'''
 
