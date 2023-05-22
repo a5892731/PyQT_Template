@@ -2,29 +2,46 @@ from PyQt5.QtWidgets import QApplication, QWidget, QVBoxLayout, QLabel, QSlider
 from PyQt5.QtCore import Qt
 
 class Slider(QWidget):
-    def __init__(self):
+    def __init__(self, layout = None, name = '', DataStorage = None,
+                 min = 0, max = 100, on_start = 50,
+                 grid_position = (0,0), rowspan = 1, columnspan = 1, enable = True,):
         super().__init__()
+
+        self.layout = layout
+        self.enable = enable
+        self.name = name
+
+        self.min = min
+        self.max = max
+        self.on_start = on_start
+
+        self.DataStorage = DataStorage
+        self.value = 0
+
+        self.grid_position = grid_position
+        self.columnspan = columnspan
+        self.rowspan = rowspan
+
         self.init_ui()
 
     def init_ui(self):
-        layout = QVBoxLayout()
+        self.slider = QSlider(Qt.Horizontal)
 
-        label = QLabel("Slider Value:")
-        slider = QSlider(Qt.Horizontal)
+        '''set slider range'''
+        self.slider.setMinimum(self.min)  # Set the minimum value of the slider
+        self.slider.setMaximum(self.max)  # Set the maximum value of the slider
+        self.slider.setValue(self.on_start)  # Set the initial value of the slider
 
-        slider.setMinimum(0)  # Set the minimum value of the slider
-        slider.setMaximum(100)  # Set the maximum value of the slider
-        slider.setValue(50)  # Set the initial value of the slider
+        '''Enable widget'''
+        self.slider.setEnabled(self.enable)
 
-        # Connect the valueChanged signal to the method
-        slider.valueChanged.connect(self.on_slider_value_changed)
+        ''' Connect the valueChanged signal to the method '''
+        self.slider.valueChanged.connect(self.on_slider_value_changed)
 
-        layout.addWidget(label)
-        layout.addWidget(slider)
+        '''show widget on layout'''
+        self.layout.addWidget(self.slider, self.grid_position[0], self.grid_position[1], self.rowspan, self.columnspan)
 
-        self.setLayout(layout)
-        self.setWindowTitle("QSlider Example")
-        self.show()
 
     def on_slider_value_changed(self, value):
-        print("Slider value:", value)
+        #print("Slider value:", value)
+        self.value = value

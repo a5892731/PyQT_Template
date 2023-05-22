@@ -19,13 +19,6 @@ class MainWindow(QMainWindow):
         self.init_gui()
 
     def init_gui(self):
-
-        '''window attributes'''
-        self.setWindowTitle(self.DataStorage.program_name)
-        self.resize(800, 600)  # Set window size
-        self.showMaximized()  # Maximized window
-        #self.setWindowIcon(QIcon("icon.png"))  # Ustawienie ikony okna
-
         main_widget = QWidget(self)
 
         layout = QVBoxLayout(main_widget)
@@ -46,6 +39,14 @@ class MainWindow(QMainWindow):
 
 
         self.setCentralWidget(main_widget)
+
+
+        '''window attributes'''
+        self.setWindowTitle(self.DataStorage.program_name)
+        #self.resize(800, 600)  # Set window size
+        self.showMaximized()  # Maximized window
+        #self.setWindowIcon(QIcon("icon.png"))  # Ustawienie ikony okna
+
         '''here are defined backend threads'''
         self.program_thread_1()
 
@@ -60,6 +61,7 @@ class MainWindow(QMainWindow):
         print(message, self.DataStorage.test_number)
 
         self.page1_group_box1.entry2.update_number(new_variable=self.DataStorage.test_number)
+        self.page1_group_box6.entry.update_number(new_variable=self.page1_group_box6.slider.value)
 
 
 class WorkerThread(QThread):

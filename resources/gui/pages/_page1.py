@@ -10,12 +10,15 @@ from resources.gui.widgets.text_widget import TextWidget
 from resources.gui.widgets.radiobutton import RadioButton
 from resources.gui.widgets.checkbox import Checkbox
 from resources.gui.widgets.combobox import ComboBox
+from resources.gui.widgets.slider import Slider
 
 
 def page1(self, tab_widget):
     '''page 1 atrubutes'''
     page1 = QWidget(self)
     grid_layout = QGridLayout(page1)
+
+
 
     '''define widgets'''
     self.page1_group_box1 = Page1_GroupBox1(title="title", grid_layout=grid_layout, DataStorage=self.DataStorage,
@@ -33,7 +36,8 @@ def page1(self, tab_widget):
     self.page1_group_box5 = Page1_GroupBox5(title="title4", grid_layout=grid_layout, DataStorage=self.DataStorage,
                                             grid_position = (0, 4), columnspan=1)
 
-
+    self.page1_group_box6 = Page1_GroupBox6(title="title5", grid_layout=grid_layout, DataStorage=self.DataStorage,
+                                            grid_position = (0, 5), columnspan=1)
 
     '''grid settings'''
     #grid_layout.setRowStretch(0, 0)  # Restrict row 0
@@ -115,6 +119,24 @@ class Page1_GroupBox5(GroupBox):
         self.combobox = ComboBox(layout = self.grid_layout, names_list = names_list, output_list = output_list,
                                  DataStorage = None, set_active = 1,
                                  grid_position = (0,0), rowspan = 1, columnspan = 1, enable = True)
+
+
+class Page1_GroupBox6(GroupBox):
+    def define_widgets(self):
+        """This function need to be filed in child class with widgets"""
+
+        self.slider = Slider(layout = self.grid_layout, name = 'slider',
+                             DataStorage = None,
+                             min = 0, max = 100, on_start = 50,
+                             grid_position = (0,0), rowspan = 1, columnspan = 1, enable = True,)
+
+
+        self.entry = EntryWidget(layout=self.grid_layout, font = "Arial", font_size=10, text_color='black',
+                 background_color='white', text_position = Qt.AlignLeft,
+                 grid_position = (2, 0), read_only = True, default='', output_widget = True)
+
+
+
 '''------------------------------------------------------------------------------------------------------------------'''
 
 class Page1_Button(ButtonWidget):

@@ -32,6 +32,9 @@ class Checkbox(QWidget):
         '''Connect the stateChanged signal to the method'''
         self.checkbox1.stateChanged.connect(self.on_checkbox_state_changed)
 
+        '''Enable widget'''
+        self.checkbox1.setEnabled(self.enable)
+
         '''show widget on layout'''
         self.layout.addWidget(self.checkbox1, self.grid_position[0], self.grid_position[1], self.rowspan, self.columnspan)
 
