@@ -1,6 +1,4 @@
-import sys
 from PyQt5.QtWidgets import QApplication, QWidget, QVBoxLayout, QLabel, QSpinBox
-
 
 class SpinBoxExample(QWidget):
     def __init__(self):
@@ -27,8 +25,3 @@ class SpinBoxExample(QWidget):
     def updateSelectedValue(self, value):
         self.selected_value_label.setText(str(value))
 
-
-if __name__ == '__main__':
-    app = QApplication(sys.argv)
-    window = SpinBoxExample()
-    sys.exit(app.exec_())
