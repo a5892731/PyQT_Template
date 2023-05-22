@@ -1,9 +1,8 @@
 import sys
-from PyQt5.QtWidgets import QApplication, QWidget, QVBoxLayout, QLabel, QCalendarWidget
-from PyQt5.QtCore import QDate
+from PyQt5.QtWidgets import QApplication, QWidget, QVBoxLayout, QTableWidget, QTableWidgetItem
 
 
-class CalendarWidgetExample(QWidget):
+class TableWidgetExample(QWidget):
     def __init__(self):
         super().__init__()
         self.initUI()
@@ -11,31 +10,33 @@ class CalendarWidgetExample(QWidget):
     def initUI(self):
         layout = QVBoxLayout()
 
-        label = QLabel("Selected date:")
-        self.selected_date_label = QLabel()
+        table = QTableWidget()
+        table.setColumnCount(3)  # Set the number of columns in the table
+        table.setRowCount(4)  # Set the number of rows in the table
 
-        self.calendar = QCalendarWidget()  # Prefix 'self' to make 'calendar' an instance variable
-        self.calendar.setGridVisible(True)
-        self.calendar.selectionChanged.connect(self.updateSelectedDate)
+        table.setHorizontalHeaderLabels(["Name", "Age", "Country"])  # Set the column header labels
 
-        default_date = QDate.currentDate()
-        self.calendar.setSelectedDate(default_date)  # Use 'self.calendar' to refer to the instance variable
-        self.updateSelectedDate()
+        # Populate the table with data
+        data = [
+            ["John", "25", "USA"],
+            ["Alice", "30", "Canada"],
+            ["Bob", "40", "Australia"],
+            ["Eva", "35", "Germany"]
+        ]
 
-        layout.addWidget(label)
-        layout.addWidget(self.selected_date_label)
-        layout.addWidget(self.calendar)  # Use 'self.calendar' to refer to the instance variable
+        for i, row in enumerate(data):
+            for j, value in enumerate(row):
+                item = QTableWidgetItem(value)
+                table.setItem(i, j, item)
+
+        layout.addWidget(table)
 
         self.setLayout(layout)
-        self.setWindowTitle("Calendar Widget Example")
+        self.setWindowTitle("Table Widget Example")
         self.show()
-
-    def updateSelectedDate(self):
-        selected_date = self.calendar.selectedDate()  # Use 'self.calendar' to refer to the instance variable
-        self.selected_date_label.setText(selected_date.toString("yyyy-MM-dd"))
 
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
-    window = CalendarWidgetExample()
+    window = TableWidgetExample()
     sys.exit(app.exec_())

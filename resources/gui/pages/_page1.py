@@ -2,18 +2,8 @@ from PyQt5.QtWidgets import QMainWindow, QVBoxLayout, QWidget, QPushButton, QLin
     QCheckBox, QLabel, QGroupBox, QGridLayout, QLayout
 from PyQt5.QtCore import Qt
 
-from resources.gui.widgets.group_box import GroupBox
-from resources.gui.widgets.button import ButtonWidget
-from resources.gui.widgets.text_label import TextLabelWidget
-from resources.gui.widgets.entry import EntryWidget
-from resources.gui.widgets.text_widget import TextWidget
-from resources.gui.widgets.radiobutton import RadioButton
-from resources.gui.widgets.checkbox import Checkbox
-from resources.gui.widgets.combobox import ComboBox
-from resources.gui.widgets.slider import Slider
-from resources.gui.widgets.progress_bar import ProgressBar
-from resources.gui.widgets.spin_box import SpinBox
-from resources.gui.widgets.calendar import CalendarWidget
+from resources.gui.widgets._widgets_lib import GroupBox, ButtonWidget, TextLabelWidget, EntryWidget, TextWidget, \
+    RadioButton, Checkbox, ComboBox, Slider, ProgressBar, SpinBox, CalendarWidget, TableWidget
 
 
 def page1(self, tab_widget):
@@ -48,11 +38,11 @@ def page1(self, tab_widget):
     self.page1_group_box8 = Page1_GroupBox8(title="title7", grid_layout=grid_layout, DataStorage=self.DataStorage,
                                             grid_position = (0, 7), columnspan=1)
 
-
     self.page1_group_box9 = Page1_GroupBox9(title="title8", grid_layout=grid_layout, DataStorage=self.DataStorage,
-                                            grid_position = (3, 0), columnspan=2)
+                                            grid_position = (2, 0), columnspan=2)
 
-
+    self.page1_group_box10 = Page1_GroupBox10(title="title9", grid_layout=grid_layout, DataStorage=self.DataStorage,
+                                            grid_position = (1, 3), columnspan=2)
 
     '''grid settings'''
     #grid_layout.setRowStretch(0, 0)  # Restrict row 0
@@ -175,6 +165,24 @@ class Page1_GroupBox9(GroupBox):
         """This function need to be filed in child class with widgets"""
 
         self.calendar = CalendarWidget(layout=self.grid_layout)
+
+
+class Page1_GroupBox10(GroupBox):
+    def define_widgets(self):
+        """This function need to be filed in child class with widgets"""
+
+        column_names = ["Name", "Age", "Country"]
+
+        data_list = [
+            ["John", "25", "USA"],
+            ["Alice", "30", "Canada"],
+            ["Bob", "40", "Australia"],
+            ["Eva", "35", "Germany"]
+        ]
+
+        self.table = TableWidget(layout=self.grid_layout, column_names = column_names, data_list = data_list,
+                                 DataStorage = None,
+                                 grid_position = (0,0), rowspan = 1, columnspan = 1, enable = True)
 
 '''------------------------------------------------------------------------------------------------------------------'''
 
