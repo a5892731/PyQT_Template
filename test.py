@@ -1,42 +1,31 @@
 import sys
-from PyQt5.QtWidgets import QApplication, QWidget, QVBoxLayout, QTableWidget, QTableWidgetItem
+from PyQt5.QtWidgets import QApplication, QMainWindow, QListView, QVBoxLayout
+from PyQt5.QtCore import Qt, QStringListModel
 
 
-class TableWidgetExample(QWidget):
+class ListViewExample(QMainWindow):
     def __init__(self):
         super().__init__()
         self.initUI()
 
     def initUI(self):
-        layout = QVBoxLayout()
+        self.setWindowTitle("List View Example")
+        self.setGeometry(100, 100, 400, 300)
 
-        table = QTableWidget()
-        table.setColumnCount(3)  # Set the number of columns in the table
-        table.setRowCount(4)  # Set the number of rows in the table
+        # Create the list view widget
+        list_view = QListView(self)
+        self.setCentralWidget(list_view)
 
-        table.setHorizontalHeaderLabels(["Name", "Age", "Country"])  # Set the column header labels
+        # Create and set the model for the list view
+        model = QStringListModel()
+        model.setStringList(["Item 1", "Item 2", "Item 3"])  # Set the data for the model
 
-        # Populate the table with data
-        data = [
-            ["John", "25", "USA"],
-            ["Alice", "30", "Canada"],
-            ["Bob", "40", "Australia"],
-            ["Eva", "35", "Germany"]
-        ]
+        list_view.setModel(model)
 
-        for i, row in enumerate(data):
-            for j, value in enumerate(row):
-                item = QTableWidgetItem(value)
-                table.setItem(i, j, item)
-
-        layout.addWidget(table)
-
-        self.setLayout(layout)
-        self.setWindowTitle("Table Widget Example")
         self.show()
 
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
-    window = TableWidgetExample()
+    window = ListViewExample()
     sys.exit(app.exec_())

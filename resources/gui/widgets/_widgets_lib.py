@@ -11,3 +11,4 @@ from resources.gui.widgets.progress_bar import ProgressBar
 from resources.gui.widgets.spin_box import SpinBox
 from resources.gui.widgets.calendar import CalendarWidget
 from resources.gui.widgets.tabele import TableWidget
+from resources.gui.widgets.folder_tree import TreeView

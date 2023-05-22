@@ -3,7 +3,7 @@ from PyQt5.QtWidgets import QMainWindow, QVBoxLayout, QWidget, QPushButton, QLin
 from PyQt5.QtCore import Qt
 
 from resources.gui.widgets._widgets_lib import GroupBox, ButtonWidget, TextLabelWidget, EntryWidget, TextWidget, \
-    RadioButton, Checkbox, ComboBox, Slider, ProgressBar, SpinBox, CalendarWidget, TableWidget
+    RadioButton, Checkbox, ComboBox, Slider, ProgressBar, SpinBox, CalendarWidget, TableWidget, TreeView
 
 
 def page1(self, tab_widget):
@@ -43,6 +43,7 @@ def page1(self, tab_widget):
 
     self.page1_group_box10 = Page1_GroupBox10(title="title9", grid_layout=grid_layout, DataStorage=self.DataStorage,
                                             grid_position = (1, 3), columnspan=2)
+
 
     '''grid settings'''
     #grid_layout.setRowStretch(0, 0)  # Restrict row 0
@@ -183,6 +184,9 @@ class Page1_GroupBox10(GroupBox):
         self.table = TableWidget(layout=self.grid_layout, column_names = column_names, data_list = data_list,
                                  DataStorage = None,
                                  grid_position = (0,0), rowspan = 1, columnspan = 1, enable = True)
+
+
+
 
 '''------------------------------------------------------------------------------------------------------------------'''
 
