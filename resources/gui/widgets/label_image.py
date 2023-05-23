@@ -1,34 +1,53 @@
 from PyQt5.QtWidgets import QApplication, QLabel, QWidget
 from PyQt5.QtGui import QPixmap
+from PyQt5.QtCore import Qt
+'''
+warning:
+use 
+        self.grid_layout.setContentsMargins(0, 0, 0, 0)
+        self.grid_layout.setAlignment(Qt.AlignTop)
+in your grid settings
 
-class ImageWidget(QWidget):
-    def __init__(self):
+'''
+
+class LabelImage(QWidget):
+    def __init__(self,  layout = None, max_side_size = 180, image_address = "resources/gui/graphics/example.jpg",
+                 grid_position = (0, 0), columnspan = 1, rowspan = 1):
         super().__init__()
 
-        self.max_side_size = 200
+        self.layout = layout
+
+        self.grid_position = grid_position
+        self.columnspan = columnspan
+        self.rowspan = rowspan
+
+        self.max_side_size = max_side_size
+
+        self.image_address = image_address
 
         self.initUI()
 
     def initUI(self):
         # Create a label to display the image
-        label = QLabel(self)
+        self.label = QLabel(self)
 
         # Load the image using QPixmap
-        self.pixmap = QPixmap("resources/gui/graphics/example.jpg")
+        self.pixmap = QPixmap(self.image_address)
 
         # Scale the pixmap to the desired size
         self.scaled_pixmap = self.resize_image(self.max_side_size)
 
         # Set the scaled pixmap as the content of the label
-        label.setPixmap(self.scaled_pixmap)
-
+        self.label.setPixmap(self.scaled_pixmap)
 
         # Center the label in the window
-        #label.move(self.width() // 2 - scaled_pixmap.width() // 2, self.height() // 2 - scaled_pixmap.height() // 2)
+        self.label.move(0, 0)
+        self.label.setContentsMargins(0, 0, 0, 0)
+        self.label.setAlignment(Qt.AlignTop)
 
-        self.setWindowTitle("Image Widget")
-        self.setGeometry(100, 100, 400, 300)
-        self.show()
+        #show widget on layout
+        self.layout.addWidget(self.label, self.grid_position[0], self.grid_position[1], self.rowspan,
+                             self.columnspan)
 
     def resize_image(self, max_side_size):
         image_size  = self.pixmap.size()
@@ -52,9 +71,3 @@ class ImageWidget(QWidget):
 
         return self.pixmap.scaled(new_width, new_height)  # Change the size here
 
-
-
-if __name__ == '__main__':
-    app = QApplication([])
-    window = ImageWidget()
-    app.exec_()

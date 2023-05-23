@@ -13,3 +13,4 @@ from resources.gui.widgets.calendar import CalendarWidget
 from resources.gui.widgets.tabele import TableWidget
 from resources.gui.widgets.folder_tree import TreeView
 from resources.gui.widgets.list_view import ListView
+from resources.gui.widgets.label_image import LabelImage

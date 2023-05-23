@@ -3,7 +3,8 @@ from PyQt5.QtWidgets import QMainWindow, QVBoxLayout, QWidget, QPushButton, QLin
 from PyQt5.QtCore import Qt
 
 from resources.gui.widgets._widgets_lib import GroupBox, ButtonWidget, TextLabelWidget, EntryWidget, TextWidget, \
-    RadioButton, Checkbox, ComboBox, Slider, ProgressBar, SpinBox, CalendarWidget, TableWidget, TreeView, ListView
+    RadioButton, Checkbox, ComboBox, Slider, ProgressBar, SpinBox, CalendarWidget, TableWidget, TreeView, ListView, \
+    LabelImage
 
 
 def page1(self, tab_widget):
@@ -47,6 +48,11 @@ def page1(self, tab_widget):
 
     self.page1_group_box11 = Page1_GroupBox11(title="title10", grid_layout=grid_layout, DataStorage=self.DataStorage,
                                             grid_position = (1, 5), columnspan=1)
+
+
+    self.page1_group_box12 = Page1_GroupBox12(title="title11", grid_layout=grid_layout, DataStorage=self.DataStorage,
+                                            grid_position = (1, 6), columnspan=1)
+
 
 
 
@@ -203,6 +209,19 @@ class Page1_GroupBox11(GroupBox):
 
         self.button = Page1_Button4(layout=self.grid_layout, name = "get item", DataStorage=self,
                                    grid_position=(1, 0), columnspan=1)
+
+
+class Page1_GroupBox12(GroupBox):
+    def define_widgets(self):
+        """This function need to be filed in child class with widgets"""
+
+        self.image = LabelImage(layout = self.grid_layout, max_side_size = 200,
+                                image_address = "resources/gui/graphics/example.jpg",
+                                grid_position = (0, 0), columnspan = 1, rowspan = 1)
+
+        #self.grid_layout.setContentsMargins(0, 0, 0, 0)
+        #self.grid_layout.setAlignment(Qt.AlignTop)
+
 
 '''------------------------------------------------------------------------------------------------------------------'''
 
