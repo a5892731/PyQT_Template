@@ -1,6 +1,6 @@
 from PyQt5.QtWidgets import QApplication, QLabel, QWidget
 from PyQt5.QtGui import QPixmap, QTransform
-from PyQt5.QtCore import Qt
+from PyQt5.QtCore import Qt, QPoint
 '''
 warning:
 use 
@@ -39,9 +39,9 @@ class LabelImage(QWidget):
 
 
         #rotate image
-        transform = QTransform().rotate(self.rotate)  # Rotate by 45 degrees
-        self.pixmap = self.pixmap.transformed(transform, Qt.SmoothTransformation)
-
+        #transform = QTransform().rotate(self.rotate)  # Rotate by 45 degrees
+        #self.pixmap = self.pixmap.transformed(transform, Qt.SmoothTransformation)
+        self.pixmap = self.rotate_image(self.pixmap, self.rotate)
 
         # Set the scaled pixmap as the content of the label
         self.label.setPixmap(self.pixmap)
@@ -57,15 +57,29 @@ class LabelImage(QWidget):
 
 
     def rotate_image(self, pixmap, angle):
-        return pixmap.setRotation(45)
+        transform = QTransform().rotate(angle)  # Rotate by 45 degrees
+        return pixmap.transformed(transform, Qt.SmoothTransformation)
+
+    def rotate_self_image(self, angle): # on button click
+
+        # Calculate the rotation center
+        center = QPoint(self.pixmap.width() / 2, self.pixmap.height() / 2)
+        # Create a transformation matrix
+        transform = QTransform().translate(center.x(), center.y()).rotate(angle).translate(-center.x(), -center.y())
+        # Apply the transformation to the pixmap
+        rotated_pixmap = self.pixmap.transformed(transform, Qt.SmoothTransformation)
+        # Set the rotated pixmap as the content of the label
+        self.label.setPixmap(rotated_pixmap)
+
+
 
     def resize_image(self, pixmap,  max_side_size):
         image_size  = pixmap.size()
         width = image_size.width()
         height = image_size.height()
 
-        '''function is resizing image by his longest side to "max_side_size"
-        other side is proportional to original'''
+        # Function resize's image by its longest side to "max_side_size"
+        # The other side is proportional to the original image
 
         if height > width:
             scale = height / max_side_size
