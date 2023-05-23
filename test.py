@@ -1,60 +1,25 @@
-from PyQt5.QtWidgets import QApplication, QLabel, QWidget
-from PyQt5.QtGui import QPixmap
+from PyQt5.QtWidgets import QApplication, QGraphicsView, QGraphicsScene, QGraphicsTextItem
+from PyQt5.QtGui import QFont, QTransform
+from PyQt5.QtCore import Qt
 
-class ImageWidget(QWidget):
-    def __init__(self):
-        super().__init__()
+app = QApplication([])
+view = QGraphicsView()
+scene = QGraphicsScene()
 
-        self.max_side_size = 200
+label1 = QGraphicsTextItem("Label 1")
+label1.setFont(QFont("Arial", 12))
+label1.setTransformOriginPoint(label1.boundingRect().center())
+label1.setRotation(45)  # Obrót o 45 stopni
 
-        self.initUI()
+label2 = QGraphicsTextItem("Label 2")
+label2.setFont(QFont("Arial", 12))
+label2.setTransformOriginPoint(label2.boundingRect().center())
+label2.setRotation(-30)  # Obrót o -30 stopni
 
-    def initUI(self):
-        # Create a label to display the image
-        label = QLabel(self)
+scene.addItem(label1)
+scene.addItem(label2)
 
-        # Load the image using QPixmap
-        self.pixmap = QPixmap("resources/gui/graphics/example.jpg")
+view.setScene(scene)
+view.show()
 
-        # Scale the pixmap to the desired size
-        self.scaled_pixmap = self.resize_image(self.max_side_size)
-
-        # Set the scaled pixmap as the content of the label
-        label.setPixmap(self.scaled_pixmap)
-
-
-        # Center the label in the window
-        #label.move(self.width() // 2 - scaled_pixmap.width() // 2, self.height() // 2 - scaled_pixmap.height() // 2)
-
-        self.setWindowTitle("Image Widget")
-        self.setGeometry(100, 100, 400, 300)
-        self.show()
-
-    def resize_image(self, max_side_size):
-        image_size  = self.pixmap.size()
-        width = image_size.width()
-        height = image_size.height()
-
-        '''function is resizing image by his longest side to "max_side_size"
-        other side is proportional to original'''
-
-        if height > width:
-            scale = height / max_side_size
-            width = width / scale
-            height = height / scale
-        else:
-            scale = width / max_side_size
-            width = width / scale
-            height = height / scale
-
-        new_width = int(width)
-        new_height = int(height)
-
-        return self.pixmap.scaled(new_width, new_height)  # Change the size here
-
-
-
-if __name__ == '__main__':
-    app = QApplication([])
-    window = ImageWidget()
-    app.exec_()
+app.exec_()

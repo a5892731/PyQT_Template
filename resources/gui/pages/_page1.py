@@ -215,9 +215,9 @@ class Page1_GroupBox12(GroupBox):
     def define_widgets(self):
         """This function need to be filed in child class with widgets"""
 
-        self.image = LabelImage(layout = self.grid_layout, max_side_size = 200,
+        self.image = LabelImage(layout = self.grid_layout, max_side_size = 120,
                                 image_address = "resources/gui/graphics/example.jpg",
-                                grid_position = (0, 0), columnspan = 1, rowspan = 1)
+                                grid_position = (0, 0), columnspan = 1, rowspan = 1, rotate= 45)
 
         #self.grid_layout.setContentsMargins(0, 0, 0, 0)
         #self.grid_layout.setAlignment(Qt.AlignTop)
