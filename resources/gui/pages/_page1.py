@@ -46,7 +46,7 @@ def page1(self, tab_widget):
 
 
     self.page1_group_box11 = Page1_GroupBox11(title="title10", grid_layout=grid_layout, DataStorage=self.DataStorage,
-                                            grid_position = (1, 5), columnspan=2)
+                                            grid_position = (1, 5), columnspan=1)
 
 
 
@@ -195,7 +195,14 @@ class Page1_GroupBox11(GroupBox):
     def define_widgets(self):
         """This function need to be filed in child class with widgets"""
 
-        self.list_view = ListView(layout=self.grid_layout)
+        items = ["Item 1", "Item 2", "Item 3"]
+
+        self.list_view = ListView(layout=self.grid_layout, grid_position = (0,0), rowspan = 1, columnspan = 1,
+                                  enable = True, items = items, DataStorage = self.DataStorage)
+
+
+        self.button = Page1_Button4(layout=self.grid_layout, name = "get item", DataStorage=self,
+                                   grid_position=(1, 0), columnspan=1)
 
 '''------------------------------------------------------------------------------------------------------------------'''
 
@@ -220,3 +227,10 @@ class Page1_Button3(ButtonWidget):
 
         self.DataStorage.text2.add_text(self.DataStorage.DataStorage.text_data) # DataStorage of button.group_box
         print('wyślij button clicked!')
+
+class Page1_Button4(ButtonWidget):
+    def button_clicked(self):
+        '''put your button function here'''
+        self.DataStorage.list_view.getItems()
+
+        self.DataStorage.list_view.getSelectedItems()

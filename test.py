@@ -1,7 +1,5 @@
-import sys
-from PyQt5.QtWidgets import QApplication, QMainWindow, QListView, QVBoxLayout, QGroupBox, QLabel, QWidget
-from PyQt5.QtCore import Qt, QStringListModel
-
+from PyQt5.QtCore import QStringListModel
+from PyQt5.QtWidgets import QApplication, QMainWindow, QListView, QVBoxLayout, QWidget
 
 class ListViewExample(QMainWindow):
     def __init__(self):
@@ -12,26 +10,30 @@ class ListViewExample(QMainWindow):
         self.setWindowTitle("List View Example")
         self.setGeometry(100, 100, 400, 300)
 
-        # Create the main widget
+        # Tworzenie głównego widgetu
         main_widget = QWidget(self)
         self.setCentralWidget(main_widget)
 
-        # Create a QVBoxLayout to hold the main layout
+        # Tworzenie układu w pionie
         layout = QVBoxLayout(main_widget)
 
-        # Create the list view widget
-        list_view = QListView()
-        layout.addWidget(list_view)
+        # Tworzenie listy danych
+        data = ["Item 1", "Item 2", "Item 3", "Item 4", "Item 5"]
 
-        # Set the model for the list view
+        # Tworzenie modelu danych
         model = QStringListModel()
-        model.setStringList(["Item 1", "Item 2", "Item 3"])  # Set the data for the model
+        model.setStringList(data)
+
+        # Tworzenie QListView
+        list_view = QListView()
         list_view.setModel(model)
+
+        # Dodawanie QListView do układu
+        layout.addWidget(list_view)
 
         self.show()
 
-
-if __name__ == '__main__':
-    app = QApplication(sys.argv)
+if __name__ == "__main__":
+    app = QApplication([])
     window = ListViewExample()
-    sys.exit(app.exec_())
+    app.exec_()
