@@ -4,7 +4,7 @@ from PyQt5.QtCore import Qt
 
 from resources.gui.widgets._widgets_lib import GroupBox, ButtonWidget, TextLabelWidget, EntryWidget, TextWidget, \
     RadioButton, Checkbox, ComboBox, Slider, ProgressBar, SpinBox, CalendarWidget, TableWidget, TreeView, ListView, \
-    LabelImage
+    LabelImage, LedRectangle
 
 
 def page1(self, tab_widget):
@@ -54,7 +54,8 @@ def page1(self, tab_widget):
                                             grid_position = (1, 6), columnspan=1)
 
 
-
+    self.page1_group_box13 = Page1_GroupBox13(title="title12", grid_layout=grid_layout, DataStorage=self.DataStorage,
+                                            grid_position = (1, 7), columnspan=1)
 
     '''grid settings'''
     #grid_layout.setRowStretch(0, 0)  # Restrict row 0
@@ -223,6 +224,28 @@ class Page1_GroupBox12(GroupBox):
 
         self.button = Page1_Button5(layout=self.grid_layout, name = "Rotate image", DataStorage=self,
                                    grid_position=(1, 0), columnspan=1)
+
+
+class Page1_GroupBox13(GroupBox):
+    def define_widgets(self):
+        """This function need to be filed in child class with widgets"""
+
+        self.label = TextLabelWidget(text = 'out1: ', layout=self.grid_layout,
+                                     font = "Arial", font_size=10, grid_position=(0, 0))
+
+        self.led = LedRectangle(layout=self.grid_layout, on_color = "green", off_color = "red",
+                 start_color='grey', dimentions = (40, 20),
+                 grid_position = (0, 1), columnspan = 1, rowspan = 1)
+
+
+        self.label = TextLabelWidget(text = 'out2: ', layout=self.grid_layout,
+                                     font = "Arial", font_size=10, grid_position=(1, 0))
+
+        self.led2 = LedRectangle(layout=self.grid_layout, on_color = "green", off_color = "red",
+                 start_color='grey', dimentions = (40, 20),
+                 grid_position = (1, 1), columnspan = 1, rowspan = 1)
+
+
 '''------------------------------------------------------------------------------------------------------------------'''
 
 class Page1_Button(ButtonWidget):
