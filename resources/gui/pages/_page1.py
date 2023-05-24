@@ -60,7 +60,7 @@ def page1(self, tab_widget):
     #grid_layout.setRowStretch(0, 0)  # Restrict row 0
     #grid_layout.setColumnStretch(0, 0)  # Restrict column 0
     grid_layout.setSizeConstraint(QLayout.SetFixedSize)        # Set size constraint
-    self.setLayout(grid_layout)         # Set layout
+    #self.setLayout(grid_layout)         # Set layout
 
     '''end page 1'''
     tab_widget.addTab(page1, "Page 1")
@@ -217,10 +217,9 @@ class Page1_GroupBox12(GroupBox):
 
         self.image = LabelImage(layout = self.grid_layout, max_side_size = 120,
                                 image_address = "resources/gui/graphics/example.jpg",
-                                grid_position = (0, 0), columnspan = 1, rowspan = 1, rotate= 0)
+                                grid_position = (0, 0), columnspan = 1, rowspan = 1, rotate= 0,
+                                margin=(0, 30, 0, 0))
 
-        self.grid_layout.setContentsMargins(0, 0, 0, 0)
-        #self.grid_layout.setAlignment(Qt.AlignTop)
 
         self.button = Page1_Button5(layout=self.grid_layout, name = "Rotate image", DataStorage=self,
                                    grid_position=(1, 0), columnspan=1)
@@ -258,6 +257,5 @@ class Page1_Button4(ButtonWidget):
 class Page1_Button5(ButtonWidget):
     def button_clicked(self):
         '''put your button function here'''
-        self.DataStorage.image.rotate += 10
+        self.DataStorage.image.rotate += 5
         self.DataStorage.image.rotate_self_image(angle=self.DataStorage.image.rotate)
-        print("rotate")
