@@ -15,7 +15,7 @@ def import_image(addres='resources/gui/pictures/pid.png', size=600, for_tk=True)
         return int(width), int(height)
 
     my_img = Image.open(addres)
-    width, height = re_sizer(my_img)
+    width, height = re_sizer(image=my_img,max=size)
 
     my_img = my_img.resize((width, height), Image.ANTIALIAS)
 
